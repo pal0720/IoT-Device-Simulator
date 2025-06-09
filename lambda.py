@@ -19,19 +19,10 @@ IOT_POLICY_NAME = os.environ.get('IOT_POLICY_NAME') # Your IoT policy name
 ECS_CLUSTER_NAME = os.environ.get('ECS_CLUSTER_NAME')
 ECS_TASK_DEFINITION = os.environ.get('ECS_TASK_DEFINITION')
 ECS_CONTAINER_NAME = os.environ.get('ECS_CONTAINER_NAME')
-# Ensure these are correctly parsed from JSON strings.
-# If they are just comma-separated strings in the env var, you'd need .split(',')
-# If they are proper JSON arrays, json.loads is correct.
 SUBNET_IDS = json.loads(os.environ.get('SUBNET_IDS')) if os.environ.get('SUBNET_IDS') else []
 SECURITY_GROUP_IDS = json.loads(os.environ.get('SECURITY_GROUP_IDS')) if os.environ.get('SECURITY_GROUP_IDS') else []
 IOT_CORE_ENDPOINT = os.environ.get('IOT_CORE_ENDPOINT')
 ROOT_CA_SSM_PARAM = os.environ.get('ROOT_CA_SSM_PARAM') # /iot/root_ca_pem
-# This role ARN should be the ECS Task Role (if used), NOT the execution role for run_task.
-# The execution role is implicitly used by Fargate for image pulling and logging.
-# If your Fargate task needs to perform AWS API calls (e.g., talk to S3), define a Task Role.
-# For this simulator, it typically only needs network access, so taskRoleArn might not be needed.
-# Let's keep it for completeness if you decide to add more permissions to the simulator.
-# ECS_TASK_ROLE_ARN = os.environ.get('ECS_TASK_ROLE_ARN', None) # Renamed for clarity, defaulted to None
 
 # TwinMaker Workspace configuration
 TWINMAKER_WORKSPACE_ID = os.environ.get('TWINMAKER_WORKSPACE_ID')
